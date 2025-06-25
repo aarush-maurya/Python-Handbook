@@ -1,0 +1,280 @@
+/*
+    ========================================
+    ADVANCED UI/UX STYLESHEET
+    ========================================
+    Features:
+    - "Sand & Amber" Professional Color Palette
+    - Animated Aurora Background
+    - Advanced Scroll-Driven Animations
+    - Fluid Typography
+    - Gradient & Glow Effects
+    - Custom Pre-loader & Scrollbar
+*/
+
+/* --- 1. Root & Theme Variables --- */
+:root {
+    --font-primary: 'Inter', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-speed-fast: 0.2s;
+    --transition-speed-med: 0.4s;
+    --transition-speed-slow: 0.6s;
+
+    /* Light Theme: "Sand & Amber" */
+    --c-bg-light: #FDFBF7;
+    --c-text-light: #3D3D3D;
+    --c-heading-light: #1A1A1A;
+    --c-accent-primary-light: #D97706;  /* Amber 600 */
+    --c-accent-secondary-light: #B45309;/* Amber 700 */
+    --c-accent-glow-light: rgba(217, 119, 6, 0.2);
+    --c-sidebar-bg-light: rgba(253, 251, 247, 0.7);
+    --c-card-bg-light: #FFFFFF;
+    --c-border-light: #F0EAE4;
+    --c-inline-code-bg-light: #FEF3C7; /* Amber 100 */
+    --c-inline-code-text-light: #92400E;/* Amber 800 */
+
+    /* Dark Theme: "Midnight & Gold" */
+    --c-bg-dark: #0C111D;
+    --c-text-dark: #AAB3C2;
+    --c-heading-dark: #F1F5F9;
+    --c-accent-primary-dark: #F59E0B;   /* Amber 500 */
+    --c-accent-secondary-dark: #FBBF24; /* Amber 400 */
+    --c-accent-glow-dark: rgba(245, 158, 11, 0.15);
+    --c-sidebar-bg-dark: rgba(12, 17, 29, 0.6);
+    --c-card-bg-dark: #182233;
+    --c-border-dark: #293447;
+    --c-inline-code-bg-dark: #3a2e16;
+    --c-inline-code-text-dark: #FDE68A; /* Amber 200 */
+}
+
+/* --- 2. Keyframe Animations --- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+@keyframes slide-up-fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes aurora-animation {
+    0% { transform: translate(-50%, -50%) rotate(0deg) scale(1.5); }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(2.0); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.5); }
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* --- 3. Global Styles & Reset --- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth;
+    --c-bg: var(--c-bg-light);
+    --c-text: var(--c-text-light);
+    --c-heading: var(--c-heading-light);
+    --c-accent-primary: var(--c-accent-primary-light);
+    --c-accent-secondary: var(--c-accent-secondary-light);
+    --c-accent-glow: var(--c-accent-glow-light);
+    --c-sidebar-bg: var(--c-sidebar-bg-light);
+    --c-card-bg: var(--c-card-bg-light);
+    --c-border: var(--c-border-light);
+    --c-inline-code-bg: var(--c-inline-code-bg-light);
+    --c-inline-code-text: var(--c-inline-code-text-light);
+}
+
+html[data-theme='dark'] {
+    color-scheme: dark;
+    --c-bg: var(--c-bg-dark);
+    --c-text: var(--c-text-dark);
+    --c-heading: var(--c-heading-dark);
+    --c-accent-primary: var(--c-accent-primary-dark);
+    --c-accent-secondary: var(--c-accent-secondary-dark);
+    --c-accent-glow: var(--c-accent-glow-dark);
+    --c-sidebar-bg: var(--c-sidebar-bg-dark);
+    --c-card-bg: var(--c-card-bg-dark);
+    --c-border: var(--c-border-dark);
+    --c-inline-code-bg: var(--c-inline-code-bg-dark);
+    --c-inline-code-text: var(--c-inline-code-text-dark);
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--c-bg);
+    color: var(--c-text);
+    font-size: 17px;
+    line-height: 1.8;
+    margin: 0;
+    transition: background-color var(--transition-speed-med) var(--ease-out-expo), color var(--transition-speed-med) var(--ease-out-expo);
+    overflow-x: hidden;
+}
+
+/* --- 4. Advanced Background & Pre-loader --- */
+body::before {
+    content: '';
+    position: fixed;
+    top: 50%; left: 50%;
+    width: 200%; height: 200%;
+    background-image: radial-gradient(circle, var(--c-accent-glow) 0%, transparent 40%);
+    background-repeat: no-repeat;
+    animation: aurora-animation 30s infinite linear;
+    z-index: -1;
+    transition: background-image var(--transition-speed-slow) ease;
+}
+
+.preloader {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--c-bg);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease;
+}
+.preloader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+.preloader::after {
+    content: '';
+    width: 50px; height: 50px;
+    border: 4px solid var(--c-border);
+    border-top-color: var(--c-accent-primary);
+    border-radius: 50%;
+    animation: spin 1s ease-in-out infinite;
+}
+
+
+/* --- 5. Layout & Custom Scrollbar --- */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background-color: var(--c-border); border-radius: 10px; border: 2px solid var(--c-bg); }
+::-webkit-scrollbar-thumb:hover { background-color: var(--c-accent-primary); }
+
+#sidebar {
+    position: fixed; top: 0; left: 0;
+    width: 300px; height: 100vh;
+    background-color: var(--c-sidebar-bg);
+    border-right: 1px solid var(--c-border);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    padding: 1.5rem 0.5rem 1.5rem 1.5rem;
+    overflow-y: auto;
+    transition: all var(--transition-speed-med) var(--ease-out-expo);
+    z-index: 100;
+}
+
+#main-content { margin-left: 300px; padding: 3rem 4rem; max-width: 980px; }
+
+/* --- 6. Sidebar & TOC --- */
+.sidebar-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--c-border);
+    padding-bottom: 1rem; margin-bottom: 1rem; padding-right: 1rem;
+}
+.sidebar-header h3 { margin: 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--c-heading); }
+
+#theme-toggle {
+    background: transparent; border: 1px solid var(--c-border); border-radius: 50%;
+    cursor: pointer; padding: 6px; color: var(--c-text);
+    display: flex; transition: all var(--transition-speed-fast) ease;
+}
+#theme-toggle:hover { transform: scale(1.1) rotate(15deg); border-color: var(--c-accent-primary); color: var(--c-accent-primary); }
+#theme-toggle .sun { display: none; }
+html[data-theme='dark'] #theme-toggle .sun { display: block; }
+#theme-toggle .moon { display: block; }
+html[data-theme='dark'] #theme-toggle .moon { display: none; }
+
+
+#toc-container li a {
+    position: relative; display: block; padding: 0.6rem 1rem; text-decoration: none; color: var(--c-text);
+    border-radius: 8px; font-size: 0.9rem; font-weight: 500;
+    transition: all var(--transition-speed-fast) var(--ease-out-expo);
+    margin-right: 1rem;
+}
+#toc-container li a:hover { background-color: var(--c-inline-code-bg); color: var(--c-accent-secondary); transform: translateX(4px); }
+#toc-container li a.active { font-weight: 700; color: var(--c-heading); }
+#toc-container li a.active::before {
+    content: ''; position: absolute; left: -8px; top: 50%; transform: translateY(-50%);
+    height: 100%; width: 4px;
+    background-image: linear-gradient(to top, var(--c-accent-primary), var(--c-accent-secondary));
+    border-radius: 4px; transition: all var(--transition-speed-med) var(--ease-out-expo);
+    box-shadow: 0 0 15px var(--c-accent-glow);
+}
+
+
+/* --- 7. Typography & Content --- */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--c-heading); font-weight: 800;
+    margin: 3rem 0 1.5rem; line-height: 1.3;
+    scroll-margin-top: 4rem; text-wrap: balance;
+}
+h1 { font-size: clamp(2.5rem, 1.5rem + 5vw, 4rem); letter-spacing: -2px; }
+h2 { font-size: clamp(2rem, 1.25rem + 4vw, 3rem); letter-spacing: -1px; padding-bottom: 0.75rem; border-bottom: 1px solid var(--c-border); }
+h3 { font-size: clamp(1.5rem, 1rem + 2vw, 2rem); }
+h4 { font-size: clamp(1.2rem, 1rem + 1vw, 1.5rem); }
+
+.part-heading {
+    font-size: 1rem; text-transform: uppercase; letter-spacing: 2px;
+    margin: 6rem 0 2rem; padding-bottom: 1rem;
+    border-bottom: 1px solid var(--c-border);
+}
+
+a { color: var(--c-accent-primary); text-decoration: none; font-weight: 500; transition: color var(--transition-speed-fast) ease; }
+a:hover { color: var(--c-accent-secondary); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;}
+
+p > code, li > code {
+    background-color: var(--c-inline-code-bg); color: var(--c-inline-code-text);
+    padding: 0.3em 0.5em; border-radius: 6px; font-size: 0.9em;
+    border: 1px solid var(--c-border); font-family: var(--font-mono);
+}
+
+/* --- 8. Scroll-Driven Animations --- */
+#main-content > * {
+    opacity: 0;
+    animation: slide-up-fade-in var(--transition-speed-slow) var(--ease-out-expo) forwards;
+    animation-timeline: view();
+    animation-range-start: entry 10%;
+    animation-range-end: entry 40%;
+}
+
+/* --- 9. Styled Components (Code, Cards, etc.) --- */
+pre[class*="language-"] {
+    position: relative;
+    padding: 2em !important; margin: 2.5em 0 !important;
+    border-radius: 12px; border: 1px solid var(--c-border);
+    font-size: 0.9rem; line-height: 1.7;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+    transition: all var(--transition-speed-med) var(--ease-out-expo);
+    overflow: hidden;
+}
+pre[class*="language-"]:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+}
+html[data-theme='dark'] pre[class*="language-"] {
+    background: rgba(0,0,0,0.2) !important;
+    box-shadow: 0 0 0 1px var(--c-border), 0 0 30px -5px var(--c-accent-glow);
+}
+
+.card {
+    background-color: var(--c-card-bg); border: 1px solid var(--c-border); border-radius: 12px;
+    padding: 1.5rem 2rem; margin: 2rem 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: all var(--transition-speed-med) var(--ease-out-expo);
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.07); }
+
+/* --- 10. Responsive Design --- */
+@media (max-width: 1100px) {
+    #sidebar {
+        position: static; width: 100%; height: auto; max-height: 40vh;
+        border-right: none; border-bottom: 1px solid var(--c-border);
+    }
+    #main-content { margin-left: 0; padding: 2rem 1.5rem; }
+}
+
+@media (max-width: 768px) {
+    body { font-size: 16px; }
+    #main-content { padding: 1.5rem 1rem; }
+    ::-webkit-scrollbar { width: 5px; }
+}
