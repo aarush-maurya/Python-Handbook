@@ -13,6 +13,25 @@
 
 /* --- 1. Root & Theme Variables --- */
 :root {
+
+
+    /* --- NEW/MODIFIED BUTTON SPECIFIC COLORS --- */
+    /* For the small 'Bookmark' buttons */
+    --c-small-btn-bg-light: var(--c-border-light); /* Blends with borders */
+    --c-small-btn-text-light: var(--c-text-light); /* General text color */
+    --c-small-btn-hover-bg-light: var(--c-accent-primary-light); /* Accent on hover */
+    --c-small-btn-hover-text-light: #FFFFFF; /* White on accent */
+
+    /* For the floating 'Go To Bookmark' button */
+    --c-floating-btn-bg-light: var(--c-heading-light); /* Dark grey/black for light theme */
+    --c-floating-btn-text-light: #FFFFFF; /* White text for contrast */
+    --c-floating-btn-hover-bg-light: var(--c-text-light); 
+/* Highlight Colors (Subtle) */
+    --c-highlight-bg-light: rgba(217, 119, 6, 0.1); /* Very light amber */
+    --c-highlight-border-light: rgba(217, 119, 6, 0.4);
+
+    /* General button text color for light theme (on accent backgrounds) */
+    --c-button-text-light: #FFFFFF;
     --font-primary: 'Inter', sans-serif;
     --font-mono: 'Roboto Mono', monospace;
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -68,6 +87,10 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
+/* Assign these new variables from their light theme counterparts */
+    --c-highlight-bg: var(--c-highlight-bg-light);
+    --c-highlight-border: var(--c-highlight-border-light);
+    --c-button-text: var(--c-button-text-light);
     scroll-behavior: smooth;
     --c-bg: var(--c-bg-light);
     --c-text: var(--c-text-light);
@@ -80,10 +103,26 @@ html {
     --c-border: var(--c-border-light);
     --c-inline-code-bg: var(--c-inline-code-bg-light);
     --c-inline-code-text: var(--c-inline-code-text-light);
+    /* Assign new button specific variables */
+    --c-small-btn-bg: var(--c-small-btn-bg-light);
+    --c-small-btn-text: var(--c-small-btn-text-light);
+    --c-small-btn-hover-bg: var(--c-small-btn-hover-bg-light);
+    --c-small-btn-hover-text: var(--c-small-btn-hover-text-light);
+
+    --c-floating-btn-bg: var(--c-floating-btn-bg-light);
+    --c-floating-btn-text: var(--c-floating-btn-text-light);
+    --c-floating-btn-hover-bg: var(--c-floating-btn-hover-bg-light);
 }
 
 html[data-theme='dark'] {
     color-scheme: dark;
+/* Add these dark theme specific assignments */
+    --c-highlight-bg-dark: rgba(245, 158, 11, 0.08); /* Very light amber for dark theme */
+    --c-highlight-border-dark: rgba(245, 158, 11, 0.3);
+
+    --c-highlight-bg: var(--c-highlight-bg-dark); /* Override light theme highlight */
+    --c-highlight-border: var(--c-highlight-border-dark); /* Override light theme highlight border */
+    --c-button-text: var(--c-text-dark); /* A light grey from your existing text var */
     --c-bg: var(--c-bg-dark);
     --c-text: var(--c-text-dark);
     --c-heading: var(--c-heading-dark);
@@ -95,6 +134,27 @@ html[data-theme='dark'] {
     --c-border: var(--c-border-dark);
     --c-inline-code-bg: var(--c-inline-code-bg-dark);
     --c-inline-code-text: var(--c-inline-code-text-dark);
+ /* --- NEW/MODIFIED DARK THEME BUTTON SPECIFIC COLORS --- */
+    /* For the small 'Bookmark' buttons */
+    --c-small-btn-bg-dark: var(--c-card-bg-dark); /* Blends with card backgrounds */
+    --c-small-btn-text-dark: var(--c-text-dark); /* General text color */
+    --c-small-btn-hover-bg-dark: var(--c-accent-primary-dark); /* Accent on hover */
+    --c-small-btn-hover-text-dark: var(--c-heading-dark); /* Lightest text on accent */
+
+    /* For the floating 'Go To Bookmark' button */
+    --c-floating-btn-bg-dark: var(--c-card-bg-dark); /* Very dark blue for dark theme */
+    --c-floating-btn-text-dark: var(--c-heading-dark); /* Lightest text for contrast */
+    --c-floating-btn-hover-bg-dark: var(--c-border-dark); /* Slightly lighter dark on hover */
+
+    /* Assign new dark theme specific variables */
+    --c-small-btn-bg: var(--c-small-btn-bg-dark);
+    --c-small-btn-text: var(--c-small-btn-text-dark);
+    --c-small-btn-hover-bg: var(--c-small-btn-hover-bg-dark);
+    --c-small-btn-hover-text: var(--c-small-btn-hover-text-dark);
+
+    --c-floating-btn-bg: var(--c-floating-btn-bg-dark);
+    --c-floating-btn-text: var(--c-floating-btn-text-dark);
+    --c-floating-btn-hover-bg: var(--c-floating-btn-hover-bg-dark);
 }
 
 body {
@@ -277,4 +337,313 @@ html[data-theme='dark'] pre[class*="language-"] {
     body { font-size: 16px; }
     #main-content { padding: 1.5rem 1rem; }
     ::-webkit-scrollbar { width: 5px; }
+}
+button {
+    background-color: var(--c-accent-primary);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px; /* Space between heading and button */
+}
+
+button:hover {
+    background-color: var(--c-accent-secondary);
+}
+/* Style for the floating highlight button */
+#highlight-bookmark-button {
+    position: fixed;
+    top: 20px; /* Adjust as needed */
+    right: 20px; /* Adjust as needed */
+    background-color: #673ab7; /* A nice purple color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add a shadow */
+    z-index: 1000; /* Ensure it's on top of other elements */
+}
+
+#highlight-bookmark-button:hover {
+    background-color: #512da8; /* Darker purple on hover */
+}
+
+/* Style for the highlighted bookmark */
+.highlighted-bookmark {
+    background-color: #ffeb3b !important; /* A soft yellow, override other styles */
+    padding: 3px; /* Add padding */
+    border-radius: 5px; /* Rounded corners */
+}
+/* Style for the floating highlight button */
+#highlight-bookmark-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50; /* A more modern green */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: background-color 0.2s ease; /* Smooth transition */
+}
+
+#highlight-bookmark-button:hover {
+    background-color: #388E3C; /* Darker green on hover */
+}
+
+/* Style for the highlighted bookmark */
+.highlighted-bookmark {
+    background-color: rgba(255, 235, 59, 0.4) !important; /* Softer, translucent yellow */
+    padding: 3px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Smooth highlight transition */
+}
+/* --- New: Styling for the small 'Bookmark' buttons next to headings --- */
+h2 > button.heading-bookmark-btn,
+h3 > button.heading-bookmark-btn,
+div.part-heading > button.heading-bookmark-btn {
+    background-color: var(--c-inline-code-bg); /* Use a subtle background, like inline code */
+    color: var(--c-inline-code-text); /* Use a subtle text color */
+    border: 1px solid var(--c-border); /* Match border with general page elements */
+    padding: 0.3em 0.7em; /* Smaller padding */
+    border-radius: 6px;
+    font-size: 0.8em; /* Smaller font size */
+    margin-left: 15px; /* Space from heading text */
+    cursor: pointer;
+    opacity: 0.7; /* Slightly less prominent */
+    transition: all 0.2s ease-out; /* Smooth transitions for hover */
+    box-shadow: none; /* No shadow by default */
+}
+
+h2 > button.heading-bookmark-btn:hover,
+h3 > button.heading-bookmark-btn:hover,
+div.part-heading > button.heading-bookmark-btn:hover {
+    background-color: var(--c-accent-primary); /* Use accent on hover */
+    color: var(--c-button-text); /* Dynamic text color (white/light grey) */
+    border-color: var(--c-accent-primary);
+    opacity: 1;
+    transform: translateY(-2px); /* Slight lift animation */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow on hover */
+}
+
+/* --- New: Floating "Go To Bookmark" Button Styling --- */
+#go-to-bookmark-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--c-accent-primary); /* Primary accent color (dynamic) */
+    color: var(--c-button-text); /* Dynamic text color (white/light grey) */
+    border: none;
+    padding: 12px 20px; /* Larger padding for prominence */
+    border-radius: 8px; /* Slightly more rounded */
+    cursor: pointer;
+    box-shadow: 0 5px 15px var(--c-accent-glow); /* Dynamic glow shadow */
+    z-index: 1000; /* Ensure it's on top */
+    font-weight: 600; /* Bolder text */
+    letter-spacing: 0.5px;
+    transition: all 0.3s var(--ease-out-expo); /* Smooth and pronounced transitions */
+}
+
+/* --- Floating "Go To Bookmark" Button Styling --- */
+#go-to-bookmark-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--c-accent-primary); /* Primary accent color (dynamic) */
+    color: var(--c-button-text); /* Dynamic text color (white/light grey) */
+    border: none;
+    padding: 8px 15px; /* <-- REDUCED PADDING HERE */
+    border-radius: 6px; /* Slightly less rounded for a more compact look */
+    cursor: pointer;
+    box-shadow: 0 4px 12px var(--c-accent-glow); /* Slightly smaller shadow */
+    z-index: 1000; /* Ensure it's on top */
+    font-weight: 600; /* Bolder text */
+    font-size: 0.9em; /* <-- SLIGHTLY SMALLER FONT SIZE */
+    letter-spacing: 0.5px;
+    transition: all 0.3s var(--ease-out-expo); /* Smooth and pronounced transitions */
+}
+
+#go-to-bookmark-btn:hover {
+    background-color: var(--c-accent-secondary); /* Secondary accent color on hover (dynamic) */
+    transform: translateY(-2px) scale(1.01); /* Reduced lift and scale for subtler effect */
+    box-shadow: 0 6px 15px var(--c-accent-glow); /* Adjusted shadow on hover */
+}
+
+#go-to-bookmark-btn:active {
+    transform: translateY(1px); /* "Press down" effect on click */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Keep the rest of your CSS for .heading-bookmark-btn and .highlighted-bookmark as is */
+
+#go-to-bookmark-btn:active {
+    transform: translateY(1px); /* "Press down" effect on click */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* --- New: Highlighted Bookmark Styling --- */
+.highlighted-bookmark {
+    background-color: var(--c-highlight-bg) !important; /* Dynamic subtle background */
+    border-left: 4px solid var(--c-highlight-border) !important; /* Left border for emphasis */
+    padding-left: 10px; /* Adjust padding due to new border */
+    border-radius: 8px; /* Slightly more rounded corners */
+    transition: background-color 0.3s ease-out, border-left 0.3s ease-out, box-shadow 0.3s ease-out; /* Smooth transition for highlight */
+    box-shadow: 0 0 10px var(--c-highlight-bg); /* Subtle glow effect for highlight */
+}
+/* --- Styling for the small 'Bookmark' buttons next to headings --- */
+h2 > button.heading-bookmark-btn,
+h3 > button.heading-bookmark-btn,
+div.part-heading > button.heading-bookmark-btn {
+    background-color: var(--c-small-btn-bg);
+    color: var(--c-small-btn-text);
+    border: 1px solid var(--c-border);
+    padding: 0.2em 0.6em; /* EVEN SMALLER PADDING HERE */
+    border-radius: 6px;
+    font-size: 0.75em; /* SLIGHTLY SMALLER FONT SIZE */
+    margin-left: 15px;
+    cursor: pointer;
+    opacity: 0.8; /* Slightly more visible than before */
+    transition: all 0.2s ease-out;
+    box-shadow: none;
+    white-space: nowrap; /* Prevents text wrap on small buttons */
+}
+
+h2 > button.heading-bookmark-btn:hover,
+h3 > button.heading-bookmark-btn:hover,
+div.part-heading > button.heading-bookmark-btn:hover {
+    background-color: var(--c-small-btn-hover-bg);
+    color: var(--c-small-btn-hover-text);
+    border-color: var(--c-small-btn-hover-bg);
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* --- Floating "Go To Bookmark" Button Styling --- */
+#go-to-bookmark-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--c-floating-btn-bg); /* Dynamic dark background */
+    color: var(--c-floating-btn-text); /* Dynamic hint of white text */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white border */
+    padding: 8px 15px;
+    border-radius: 6px; /* Slightly less rounded for compact look */
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Darker, more pronounced shadow */
+    z-index: 1000;
+    font-weight: 600;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+    transition: all 0.3s var(--ease-out-expo);
+}
+
+#go-to-bookmark-btn:hover {
+    background-color: var(--c-floating-btn-hover-bg); /* Dynamic slightly lighter dark on hover */
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+    border-color: var(--c-accent-primary); /* Accent border on hover */
+}
+
+#go-to-bookmark-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Highlighted Bookmark Styling --- */
+.highlighted-bookmark {
+    background-color: var(--c-highlight-bg) !important;
+    border-left: 4px solid var(--c-highlight-border) !important;
+    padding-left: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease-out, border-left 0.3s ease-out, box-shadow 0.3s ease-out;
+    box-shadow: 0 0 10px var(--c-highlight-bg);
+}
+/* --- Styling for the small 'Bookmark' buttons next to headings --- */
+h2 > button.heading-bookmark-btn,
+h3 > button.heading-bookmark-btn,
+div.part-heading > button.heading-bookmark-btn {
+    background-color: var(--c-small-btn-bg);
+    color: var(--c-small-btn-text); /* This color will be inherited by the SVG's stroke/fill */
+    border: 1px solid var(--c-border);
+    padding: 0.3em 0.6em; /* Adjust padding for icon */
+    border-radius: 6px;
+    font-size: 0.75em; /* This will affect icon size if using ems */
+    margin-left: 15px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: all 0.2s ease-out;
+    box-shadow: none;
+    white-space: nowrap;
+    display: inline-flex; /* NEW: Use flexbox for vertical alignment of icon */
+    align-items: center; /* NEW: Center icon vertically */
+    justify-content: center; /* NEW: Center icon horizontally if needed */
+}
+
+h2 > button.heading-bookmark-btn .bookmark-icon,
+h3 > button.heading-bookmark-btn .bookmark-icon,
+div.part-heading > button.heading-bookmark-btn .bookmark-icon {
+    width: 1em;   /* NEW: Base size relative to button font-size */
+    height: 1em;  /* NEW: Base size relative to button font-size */
+    stroke: currentColor; /* NEW: Icon color inherits button's color */
+    fill: none; /* NEW: Ensure it's an outline icon */
+    vertical-align: middle; /* NEW: Align icon with text baseline if text were present */
+}
+
+
+h2 > button.heading-bookmark-btn:hover,
+h3 > button.heading-bookmark-btn:hover,
+div.part-heading > button.heading-bookmark-btn:hover {
+    background-color: var(--c-small-btn-hover-bg);
+    color: var(--c-small-btn-hover-text); /* This color will be inherited by the SVG */
+    border-color: var(--c-small-btn-hover-bg);
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* --- Floating "Go To Bookmark" Button Styling (UNCHANGED) --- */
+#go-to-bookmark-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--c-floating-btn-bg);
+    color: var(--c-floating-btn-text);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    font-weight: 600;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+    transition: all 0.3s var(--ease-out-expo);
+}
+
+#go-to-bookmark-btn:hover {
+    background-color: var(--c-floating-btn-hover-bg);
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    border-color: var(--c-accent-primary);
+}
+
+#go-to-bookmark-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Highlighted Bookmark Styling (UNCHANGED) --- */
+.highlighted-bookmark {
+    background-color: var(--c-highlight-bg) !important;
+    border-left: 4px solid var(--c-highlight-border) !important;
+    padding-left: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease-out, border-left 0.3s ease-out, box-shadow 0.3s ease-out;
+    box-shadow: 0 0 10px var(--c-highlight-bg);
 }
