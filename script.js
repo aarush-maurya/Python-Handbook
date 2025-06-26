@@ -62,6 +62,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         tocContainer.appendChild(tocList);
+    
+        // --- TOC Search Filtering ---
+const tocSearch = document.getElementById('toc-search');
+if (tocSearch) {
+    tocSearch.addEventListener('input', () => {
+        const searchTerm = tocSearch.value.toLowerCase();
+        const tocItems = tocContainer.querySelectorAll('li');
+
+        tocItems.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            item.style.display = text.includes(searchTerm) ? '' : 'none';
+        });
+    });
+}
+
     }
 
     // Smooth scrolling for TOC links
@@ -119,6 +134,43 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(prismAutoloader);
 
     // --- BOOKMARK FUNCTIONALITY ---
+        // --- Full-page Content Search ---------------------------------------
+    const contentSearch = document.getElementById('content-search');
+    const matchCount    = document.getElementById('search-match-count');
+    let lastSearchTerm  = '';
+
+    contentSearch?.addEventListener('input', () => {
+        const term = contentSearch.value.trim().toLowerCase();
+        if (term === lastSearchTerm) return;
+        lastSearchTerm = term;
+
+        // Remove old highlights
+        document.querySelectorAll('.highlight-search')
+                .forEach(el => { el.innerHTML = el.textContent; 
+                                el.classList.remove('highlight-search'); });
+
+        if (!term) { matchCount.textContent = ''; return; }
+
+        let hits = 0;
+        document.querySelectorAll('#main-content p, li, code, pre')
+                .forEach(el => {
+                    const txt = el.textContent;
+                    if (txt.toLowerCase().includes(term)) {
+                        el.innerHTML = txt.replace(
+                            new RegExp(`(${term})`, 'gi'),
+                            '<mark class="highlight-search">$1</mark>'
+                        );
+                        el.classList.add('highlight-search');
+                        hits++;
+                    }
+                });
+
+        matchCount.textContent =
+            hits ? `${hits} match${hits > 1 ? 'es' : ''}` : 'No matches';
+        document.querySelector('.highlight-search')
+                ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
 
     // Function to save bookmark using localStorage
     function saveBookmark(sectionId) {
@@ -188,6 +240,11 @@ document.addEventListener('DOMContentLoaded', () => {
     goToBookmarkBtn.id = 'go-to-bookmark-btn'; // Specific ID for unique styling (defined in CSS)
     goToBookmarkBtn.addEventListener('click', loadBookmark); // This button triggers load and highlight
     document.body.appendChild(goToBookmarkBtn);
+        // --- Sidebar Toggle Button ---
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    sidebarToggle.addEventListener('click', () => {
+        document.body.classList.toggle('sidebar-collapsed');
+    });
 
     // Removed the separate "Load Bookmark" button as it's now redundant.
     // The 'goToBookmarkBtn' now handles both functions.
